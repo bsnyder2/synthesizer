@@ -6,7 +6,7 @@ rtaudio = rtaudio-src/RtAudio.cpp
 all: $(targets)
 
 clean:
-	rm -rf $(targets) synth 
+	rm -rf $(targets) synth synth.dSYM/
 
 alsa: synthesizer.o samplegenerator.o tui.o $(rtaudio)
 	g++ $(cflags) -o synth $^ -D'__LINUX_ALSA__' -I/usr/include/rtaudio -lasound -lpthread -lncurses
