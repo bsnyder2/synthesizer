@@ -2,11 +2,13 @@
 
 #include "samplegenerator.hpp"
 
+// Returns the current generator frequency in Hz.
 int SampleGenerator::toHz()
 {
     return round(440 * pow(2, semitones / (double)12));
 }
 
+// Writes n samples to a buffer.
 void SampleGenerator::getSamples(double *buffer, int n_frames, double stream_time)
 {
     for (int frame_i = 0; frame_i < n_frames; frame_i++)
