@@ -69,9 +69,10 @@ void TUI::init()
     // Allocate space for SampleGenerator member
     sg = (SampleGenerator *)malloc(sizeof(SampleGenerator));
 
-    // Set initial amplitude and frequency
+    // Set initial amplitude, frequency, octave
     sg->amplitude = 255;
     sg->semitones = 0;
+    sg->octave = 0;
 
     // Initialize ncurses
     initscr();            // Initialize ncurses screen
@@ -86,9 +87,10 @@ void TUI::init()
 // Updates the TUI (one frame).
 int TUI::update()
 {
-    // Get current amplitude and frequency
+    // Get current amplitude, frequency, octave
     int amplitude = sg->amplitude;
     int semitones = sg->semitones;
+    int octave = sg->octave;
 
     drawWave();
 
@@ -124,96 +126,105 @@ int TUI::update()
         break;
     case 'x':
         strcpy(display, "oct++  ");
-        if (semitones <= 12)
+        if (semitones <= 12) {
             semitones += 12;
+            octave++;
+        }
         break;
     case 'z':
         strcpy(display, "oct--  ");
-        if (semitones >= -12)
+        if (semitones >= -12) {
             semitones -= 12;
+            octave--;
+        }
         break;
     case 'a':
         strcpy(display, "C      ");
-        semitones = -9;
+        semitones = -9 + 12 * octave;
         break;
     case 'w':
         strcpy(display, "C# / Db");
-        semitones = -8;
+        semitones = -8 + 12 * octave;
         break;
     case 's':
         strcpy(display, "D      ");
-        semitones = -7;
+        semitones = -7 + 12 * octave;
         break;
     case 'e':
         strcpy(display, "D# / Eb");
-        semitones = -6;
+        semitones = -6 + 12 * octave;
         break;
     case 'd':
         strcpy(display, "E      ");
-        semitones = -5;
+        semitones = -5 + 12 * octave;
         break;
     case 'f':
         strcpy(display, "F      ");
-        semitones = -4;
+        semitones = -4 + 12 * octave;
         break;
     case 't':
         strcpy(display, "F# / Gb");
-        semitones = -3;
+        semitones = -3 + 12 * octave;
         break;
     case 'g':
         strcpy(display, "G      ");
-        semitones = -2;
+        semitones = -2 + 12 * octave;
         break;
     case 'y':
         strcpy(display, "G# / Ab");
-        semitones = -1;
+        semitones = -1 + 12 * octave;
         break;
     case 'h':
         strcpy(display, "A      ");
-        semitones = 0;
+        semitones = 0 + 12 * octave;
         break;
     case 'u':
         strcpy(display, "A# / Bb");
-        semitones = 1;
+        semitones = 1 + 12 * octave;
         break;
     case 'j':
         strcpy(display, "B      ");
-        semitones = 2;
+        semitones = 2 + 12 * octave;
         break;
     case 'k':
         strcpy(display, "C      ");
-        semitones = 3;
+        semitones = 3 + 12 * octave;
         break;
     case 'o':
         strcpy(display, "C# / Db");
-        semitones = 4;
+        semitones = 4 + 12 * octave;
         break;
     case 'l':
         strcpy(display, "D      ");
-        semitones = 5;
+        semitones = 5 + 12 * octave;
         break;
     case 'p':
         strcpy(display, "D# / Eb");
-        semitones = 6;
+        semitones = 6 + 12 * octave;
         break;
     case ';':
         strcpy(display, "E      ");
-        semitones = 7;
+        semitones = 7 + 12 * octave;
         break;
     case '\'':
         strcpy(display, "F      ");
-        semitones = 8;
+        semitones = 8 + 12 * octave;
         break;
     }
 
-    // Set amplitude and frequency
+    char octave_display = (octave + 4) + 48;
+    strncat(display, &octave_display, 1);
+
+    // Set amplitude, frequency, octave
     sg->amplitude = amplitude;
     sg->semitones = semitones;
+    sg->octave = octave;
     displayString(WINDOW_HEIGHT + 2, 0, (char *)display);
 
     return 0;
 }
 
+// Closes the TUI.
 int TUI::close()
 {
     endwin();
