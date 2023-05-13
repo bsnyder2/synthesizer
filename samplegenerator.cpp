@@ -7,12 +7,6 @@ int SampleGenerator::toHz()
     return round(440 * pow(2, semitones / (double)12));
 }
 
-void SampleGenerator::set(int a, int s)
-{
-    amplitude = a;
-    semitones = s;
-}
-
 void SampleGenerator::getSamples(double *buffer, int n_frames, double stream_time)
 {
     for (int frame_i = 0; frame_i < n_frames; frame_i++)

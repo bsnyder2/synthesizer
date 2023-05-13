@@ -11,7 +11,6 @@ public:
     int semitones;
 
     int toHz();
-    void set(int, int);
     void getSamples(double *, int, double);
 };
 
