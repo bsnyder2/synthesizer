@@ -9,6 +9,7 @@ private:
 public:
     int amplitude;
     int semitones;
+    int octave;
 
     int toHz();
     void getSamples(double *, int, double);
