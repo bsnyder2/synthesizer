@@ -1,10 +1,19 @@
-Ryan Beatty, Ben Snyder, Joshua Bowen, Emerson Rosen-Jones
-
-A project to create a CLI/TUI oscillator-based synth.
+Ben Snyder, Joshua Bowen, Emerson Rosen-Jones
 
 TODO
-	button for play/pause
-	preset buttons for wave shape - square, sine, etc
-	scale window for terminal dimensions
-	keyboard notes should refer to current octave
-	figure out the compiler warnings
+	Keyboard set notes should refer to current octave
+		Current octave as instance variable
+
+	Interactive
+		Play/pause buttons
+		Preset buttons for wave shape (square, sine, etc.)
+		Draw one wave period with keyboard, set as samples
+			Should also be accessible with mouse
+
+	Rewrite RtAudio code for our specific purposes
+		No longer utilizing external library
+		Removes compiler warnings
+
+	Info pane on button press/click
+
+	Window should scale to terminal dimensions (?)
