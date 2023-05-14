@@ -1,8 +1,8 @@
 Ben Snyder, Joshua Bowen, Emerson Rosen-Jones
 
 TODO
-	Keyboard set notes should refer to current octave
-		Current octave as instance variable
+	Frequency should be bounded at Cx, Fy instead of Ax, Ay
+	Current octave should be displayed, considering part of the octave above can be played at any point
 
 	Interactive
 		Play/pause buttons
