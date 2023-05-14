@@ -126,14 +126,16 @@ int TUI::update()
         break;
     case 'x':
         strcpy(display, "oct++  ");
-        if (semitones <= 12) {
+        if (semitones <= 12)
+        {
             semitones += 12;
             octave++;
         }
         break;
     case 'z':
         strcpy(display, "oct--  ");
-        if (semitones >= -12) {
+        if (semitones >= -12)
+        {
             semitones -= 12;
             octave--;
         }
@@ -210,6 +212,8 @@ int TUI::update()
         strcpy(display, "F      ");
         semitones = 8 + 12 * octave;
         break;
+    default:
+        strcpy(display, "       ");
     }
 
     char octave_display = (octave + 4) + 48;
