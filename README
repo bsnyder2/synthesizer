@@ -1,14 +1,17 @@
 Ben Snyder, Joshua Bowen, Emerson Rosen-Jones
 
 TODO
-	Frequency should be bounded at Cx, Fy instead of Ax, Ay
-	Current octave should be displayed, considering part of the octave above can be played at any point
+	Display
+		Frequency should be bounded at Cx, Fy instead of Ax, Ay
+		Current octave should be displayed, considering part of the octave above can be played at any point
 
-	Interactive
+	Features
 		Play/pause buttons
 		Preset buttons for wave shape (square, sine, etc.)
 		Draw one wave period with keyboard, set as samples
 			Should also be accessible with mouse
+		Staccato/legato toggle
+		Arpeggiator
 
 	Rewrite RtAudio code for our specific purposes
 		No longer utilizing external library
