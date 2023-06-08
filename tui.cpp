@@ -92,14 +92,15 @@ int TUI::update()
     int semitones = sg->semitones;
     int octave = sg->octave;
 
-    drawWave();
-
-    // Print amplitude and frequency
-    char display[20];
+    // Display amplitude and frequency
     mvprintw(WINDOW_HEIGHT + 4 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6.2f %%", amplitude * 100 / (double)255);
     mvprintw(WINDOW_HEIGHT + 5 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6d Hz", sg->toHz());
 
-    // Get keyboard input
+    drawWave();
+
+    // Set local values and display according to keyboard input
+    char display[20];
+    int is_upper_octave = 0;
     switch (getch())
     {
     case 'q':
@@ -191,39 +192,46 @@ int TUI::update()
     case 'k':
         strcpy(display, "C      ");
         semitones = 3 + 12 * octave;
+        is_upper_octave = 1;
         break;
     case 'o':
         strcpy(display, "C# / Db");
         semitones = 4 + 12 * octave;
+        is_upper_octave = 1;
         break;
     case 'l':
         strcpy(display, "D      ");
         semitones = 5 + 12 * octave;
+        is_upper_octave = 1;
         break;
     case 'p':
         strcpy(display, "D# / Eb");
         semitones = 6 + 12 * octave;
+        is_upper_octave = 1;
         break;
     case ';':
         strcpy(display, "E      ");
         semitones = 7 + 12 * octave;
+        is_upper_octave = 1;
         break;
     case '\'':
         strcpy(display, "F      ");
         semitones = 8 + 12 * octave;
+        is_upper_octave = 1;
         break;
     default:
         strcpy(display, "       ");
     }
 
-    char octave_display = (octave + 4) + 48;
+    // Display octave
+    char octave_display = (octave + 4 + is_upper_octave) + 48;
     strncat(display, &octave_display, 1);
+    displayString(WINDOW_HEIGHT + 2, 0, (char *)display);
 
     // Set amplitude, frequency, octave
     sg->amplitude = amplitude;
     sg->semitones = semitones;
     sg->octave = octave;
-    displayString(WINDOW_HEIGHT + 2, 0, (char *)display);
 
     return 0;
 }
@@ -232,7 +240,6 @@ int TUI::update()
 int TUI::close()
 {
     endwin();
-
     free(sg);
 
     return 0;

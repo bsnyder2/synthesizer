@@ -9,7 +9,7 @@ private:
     static const int WINDOW_Y_OFFSET = 2;
     static const int WINDOW_X_OFFSET = 2;
     static const int WINDOW_HEIGHT = 16;
-    static const int WINDOW_WIDTH = 128;
+    static const int WINDOW_WIDTH = 96;
 
     static const int SCALE_FACTOR = WINDOW_HEIGHT / 2;
     static const int AMP_STEP = 15;
