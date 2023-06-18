@@ -69,10 +69,13 @@ void TUI::init()
     // Allocate space for SampleGenerator member
     sg = (SampleGenerator *)malloc(sizeof(SampleGenerator));
 
-    // Set initial amplitude, frequency, octave
+    // Initialize amplitude, frequency, octave in generator
     sg->amplitude = 255;
     sg->semitones = 0;
     sg->octave = 0;
+
+    // Initialize upper octave boolean in TUI
+    in_upper_octave = 0;
 
     // Initialize ncurses
     initscr();            // Initialize ncurses screen
@@ -100,7 +103,6 @@ int TUI::update()
 
     // Set local values and display according to keyboard input
     char display[20];
-    int is_upper_octave = 0;
     switch (getch())
     {
     case 'q':
@@ -117,108 +119,120 @@ int TUI::update()
         break;
     case KEY_RIGHT:
         strcpy(display, "freq++ ");
-        if (semitones < 24)
+        if (semitones < 32) // F7 - A4 = 32
             semitones++;
         break;
     case KEY_LEFT:
         strcpy(display, "freq-- ");
-        if (semitones > -24)
+        if (semitones > -33) // A4 - C2 = -33
             semitones--;
         break;
     case 'x':
         strcpy(display, "oct++  ");
-        if (semitones <= 12)
+        if (octave < 2)
             octave++;
         break;
     case 'z':
         strcpy(display, "oct--  ");
-        if (semitones >= -12)
+        if (octave > -2)
             octave--;
         break;
     case 'a':
         strcpy(display, "C      ");
         semitones = -9 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'w':
         strcpy(display, "C# / Db");
         semitones = -8 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 's':
         strcpy(display, "D      ");
         semitones = -7 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'e':
         strcpy(display, "D# / Eb");
         semitones = -6 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'd':
         strcpy(display, "E      ");
         semitones = -5 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'f':
         strcpy(display, "F      ");
         semitones = -4 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 't':
         strcpy(display, "F# / Gb");
         semitones = -3 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'g':
         strcpy(display, "G      ");
         semitones = -2 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'y':
         strcpy(display, "G# / Ab");
         semitones = -1 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'h':
         strcpy(display, "A      ");
         semitones = 0 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'u':
         strcpy(display, "A# / Bb");
         semitones = 1 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'j':
         strcpy(display, "B      ");
         semitones = 2 + 12 * octave;
+        in_upper_octave = 0;
         break;
     case 'k':
         strcpy(display, "C      ");
         semitones = 3 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     case 'o':
         strcpy(display, "C# / Db");
         semitones = 4 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     case 'l':
         strcpy(display, "D      ");
         semitones = 5 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     case 'p':
         strcpy(display, "D# / Eb");
         semitones = 6 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     case ';':
         strcpy(display, "E      ");
         semitones = 7 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     case '\'':
         strcpy(display, "F      ");
         semitones = 8 + 12 * octave;
-        is_upper_octave = 1;
+        in_upper_octave = 1;
         break;
     default:
         strcpy(display, "       ");
     }
 
     // Display octave
-    char octave_display = (octave + 4 + is_upper_octave) + 48;
+    char octave_display = (octave + 4 + in_upper_octave) + 48;
     strncat(display, &octave_display, 1);
     displayString(WINDOW_HEIGHT + 2, 0, (char *)display);
 

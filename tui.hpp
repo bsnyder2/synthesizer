@@ -14,6 +14,8 @@ private:
     static const int SCALE_FACTOR = WINDOW_HEIGHT / 2;
     static const int AMP_STEP = 15;
 
+    int in_upper_octave;
+
     void displayString(int, int, char *);
     void drawRect(int, int, int, int);
 
