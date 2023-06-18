@@ -87,6 +87,8 @@ void TUI::init()
 // Updates the TUI (one frame).
 int TUI::update()
 {
+    drawWave();
+
     // Get current amplitude, frequency, octave
     int amplitude = sg->amplitude;
     int semitones = sg->semitones;
@@ -95,8 +97,6 @@ int TUI::update()
     // Display amplitude and frequency
     mvprintw(WINDOW_HEIGHT + 4 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6.2f %%", amplitude * 100 / (double)255);
     mvprintw(WINDOW_HEIGHT + 5 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6d Hz", sg->toHz());
-
-    drawWave();
 
     // Set local values and display according to keyboard input
     char display[20];
@@ -128,18 +128,12 @@ int TUI::update()
     case 'x':
         strcpy(display, "oct++  ");
         if (semitones <= 12)
-        {
-            semitones += 12;
             octave++;
-        }
         break;
     case 'z':
         strcpy(display, "oct--  ");
         if (semitones >= -12)
-        {
-            semitones -= 12;
             octave--;
-        }
         break;
     case 'a':
         strcpy(display, "C      ");
