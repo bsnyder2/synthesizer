@@ -3,9 +3,6 @@
 
 class SampleGenerator
 {
-private:
-    static constexpr double PI = 3.14159;
-
 public:
     int amplitude;
     int semitones;
