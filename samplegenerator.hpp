@@ -8,8 +8,10 @@ public:
     int semitones;
     int octave;
 
+    int wave_shape;
+
     int toHz();
-    void getSamples(double *, int, double);
+    void fillSamples(double *, int, double, int);
 };
 
 #endif /* SAMPLEGENERATOR_H */

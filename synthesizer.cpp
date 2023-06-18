@@ -3,9 +3,9 @@
 #include "samplegenerator.hpp"
 #include "tui.hpp"
 
-// Sine wave generator function for use with RtAudio.
-int sine(void *output_buffer, void *input_buffer, unsigned int n_frames,
-         double stream_time, RtAudioStreamStatus status, void *user_data)
+// Waveform generator function for use with RtAudio.
+int waveform(void *output_buffer, void *input_buffer, unsigned int n_frames,
+             double stream_time, RtAudioStreamStatus status, void *user_data)
 {
     // Input buffer is unused here
     (void)input_buffer;
@@ -19,7 +19,7 @@ int sine(void *output_buffer, void *input_buffer, unsigned int n_frames,
         return 1;
     }
 
-    sg->getSamples(buffer, n_frames, stream_time);
+    sg->fillSamples(buffer, n_frames, stream_time, sg->wave_shape);
 
     return 0;
 }
@@ -47,7 +47,7 @@ int main()
     {
         dac.openStream(
             &params, NULL, RTAUDIO_FLOAT64,
-            sample_rate, &buffer_frames, &sine,
+            sample_rate, &buffer_frames, &waveform,
             (void *)tui.sg);
         dac.startStream();
     }

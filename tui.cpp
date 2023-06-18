@@ -54,7 +54,7 @@ void TUI::drawWave()
 
     // Get samples
     double samples[WINDOW_WIDTH];
-    sg->getSamples(samples, WINDOW_WIDTH, 0);
+    sg->fillSamples(samples, WINDOW_WIDTH, 0, sg->wave_shape);
 
     for (int s = 0; s < WINDOW_WIDTH; s++)
     {
@@ -69,10 +69,11 @@ void TUI::init()
     // Allocate space for SampleGenerator member
     sg = (SampleGenerator *)malloc(sizeof(SampleGenerator));
 
-    // Initialize amplitude, frequency, octave in generator
+    // Initialize amplitude, frequency, octave, wave shape in generator
     sg->amplitude = 255;
     sg->semitones = 0;
     sg->octave = 0;
+    sg->wave_shape = 0;
 
     // Initialize upper octave boolean in TUI
     in_upper_octave = 0;
@@ -107,6 +108,12 @@ int TUI::update()
     {
     case 'q':
         return 1;
+    case '1':
+        sg->wave_shape = 0;
+        break;
+    case '2':
+        sg->wave_shape = 1;
+        break;
     case KEY_UP:
         strcpy(display, "amp++  ");
         if (amplitude <= 255 - AMP_STEP)
