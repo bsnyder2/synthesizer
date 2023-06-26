@@ -109,9 +109,11 @@ int TUI::update()
     case 'q':
         return 1;
     case '1':
+        strcpy(display, "sine   ");
         sg->wave_shape = 0;
         break;
     case '2':
+        strcpy(display, "saw    ");
         sg->wave_shape = 1;
         break;
     case KEY_UP:

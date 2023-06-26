@@ -4,6 +4,9 @@ TODO
 	Display
 		Waveform should be "right-side-up"
 
+	Audio
+		Normalize waveforms -> same perceived volume
+
 	Features
 		Play/pause buttons
 		Preset buttons for wave shape (square, sine, etc.)
