@@ -116,6 +116,10 @@ int TUI::update()
         strcpy(display, "saw    ");
         sg->wave_shape = 1;
         break;
+    case '3':
+        strcpy(display, "square ");
+        sg->wave_shape = 2;
+        break;
     case KEY_UP:
         strcpy(display, "amp++  ");
         if (amplitude <= 255 - AMP_STEP)
