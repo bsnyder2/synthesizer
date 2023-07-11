@@ -22,7 +22,7 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
         case 1: // Sawtooth wave
             // FIX THIS
             *buffer++ = (amplitude / (double)255) *
-                        (std::fmod((2 * toHz() * ((frame_i / (double)44100) + stream_time)), 2) - 1);
+                        2 * ((toHz() * frame_i / (double)44100) - floor(0.5 + (toHz() * frame_i / (double)44100)));
             break;
         case 2: // Square wave
             *buffer++ = (amplitude / (double)255) *

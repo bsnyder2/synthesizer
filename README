@@ -9,13 +9,13 @@ TODO
 
 	Features
 		Play/pause buttons
-		Preset buttons for wave shape (square, sine, etc.)
+		Preset buttons for wave shape (square, sine, etc.) (instead additive ?)
 		Draw one wave period with keyboard, set as samples
 			Should also be accessible with mouse
 		Staccato/legato toggle
 		Arpeggiator
 		Waveform antialiasing
-		Polyphony
+		Polyphony - additive synthesis
 
 	Rewrite RtAudio code for our specific purposes
 		No longer utilizing external library
