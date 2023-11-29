@@ -59,7 +59,7 @@ void TUI::drawWave()
     for (int s = 0; s < WINDOW_WIDTH; s++)
     {
         int scaled_sample = round(samples[s] * SCALE_FACTOR);
-        displayString(scaled_sample + (WINDOW_HEIGHT / 2), s, (char *)"*");
+        displayString((WINDOW_HEIGHT / 2) - scaled_sample, s, (char *)"*");
     }
 }
 
