@@ -14,11 +14,13 @@ void TUI::displayString(int y, int x, char *symbol)
 // Draws a rectangle defined by given coordinates.
 void TUI::drawRect(int y1, int x1, int y2, int x2)
 {
+    // Draw edge lines
     mvhline(y1, x1, 0, x2 - x1);
     mvhline(y2, x1, 0, x2 - x1);
     mvvline(y1, x1, 0, y2 - y1);
     mvvline(y1, x2, 0, y2 - y1);
 
+    // Draw corners
     mvaddch(y1, x1, ACS_ULCORNER);
     mvaddch(y2, x1, ACS_LLCORNER);
     mvaddch(y1, x2, ACS_URCORNER);
@@ -63,6 +65,36 @@ void TUI::drawWave()
     }
 }
 
+// Draws the keyboard window.
+void TUI::drawKeyboardWindow()
+{
+    // MAKE SURE:
+    // redraw ENTIRE keyboard window every time there is a change.
+    // To avoid unnecessary complexity, just have string constants for all 18 keyboard images
+    // (Can have entire keyboard image in one string just using '\n's)
+
+    mvprintw(0, 1, "  ____ __  __ __  _  _____  _   _   ____  _   _\n  (_ (_`\\ \\/ /|  \\| ||_   _|| |_| | (_ (_`| |_| |\n .__)__) |__| |_|\\__|  |_|  |_| |_|.__)__)|_| |_|");
+    // mvprintw(0, 1, "  ____ __  __ __  _  _____  _   _   ____  _   _");
+    // mvprintw(1, 1, " (_ (_`\\ \\/ /|  \\| ||_   _|| |_| | (_ (_`| |_| |");
+    // mvprintw(2, 1, ".__)__) |__| |_|\\__|  |_|  |_| |_|.__)__)|_| |_|");
+
+    int j = 12;
+    int k = 22;
+
+    mvaddch(j + 1, k, ACS_TTEE);
+    mvaddch(j + 1, k + 44, ACS_RTEE);
+
+    mvprintw(j + 2, k, "|  |#| | |  |  | |#| | | |  |  | | | |  |   |");
+    mvprintw(j + 3, k, "|  |#| | |  |  | |#| | | |  |  | | | |  |   |");
+    mvprintw(j + 4, k, "|   |   |   |   |###|   |   |   |   |   |   |");
+    mvprintw(j + 5, k, "|___________________________________________|");
+    mvprintw(j + 6, k, "  a   s   d   f   g   h   j   k   l   ;   '  ");
+    mvprintw(j + 7, k, "    w   e       t   y   u       o   p        ");
+
+    // Do this with vlines instead?
+    // mvvline(0, 4, 0, 5);
+}
+
 // Initializes the TUI.
 void TUI::init()
 {
@@ -86,6 +118,7 @@ void TUI::init()
     keypad(stdscr, TRUE); // Allow for arrow key input
 
     drawWaveWindow();
+    drawKeyboardWindow();
 }
 
 // Updates the TUI (one frame).

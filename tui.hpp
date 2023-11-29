@@ -6,7 +6,7 @@
 class TUI
 {
 private:
-    static const int WINDOW_Y_OFFSET = 2;
+    static const int WINDOW_Y_OFFSET = 4;
     static const int WINDOW_X_OFFSET = 2;
     static const int WINDOW_HEIGHT = 8;
     static const int WINDOW_WIDTH = 64;
@@ -22,6 +22,7 @@ private:
     void drawWaveWindow();
     void clearWaveWindow();
     void drawWave();
+    void drawKeyboardWindow();
 
 public:
     SampleGenerator *sg;
