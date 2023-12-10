@@ -198,7 +198,7 @@ int TUI::update()
     drawControlWindow();
 
     // Get keyboard input to set new values for generator
-    int semitoneOffset = 0;
+    int semitones = sg->semitones;
     char note_name[64];
     strcpy(note_name, sg->note_name);
 
@@ -224,13 +224,13 @@ int TUI::update()
             sg->amplitude -= AMP_STEP;
         break;
     case KEY_RIGHT:
-        if (sg->semitones < 32) // F7 - A4 = 32
-            sg->semitones++;
-        return 0;
+        if (semitones < 32) // F7 - A4 = 32
+            semitones++;
+        break;
     case KEY_LEFT:
-        if (sg->semitones > -33) // A4 - C2 = -33
-            sg->semitones--;
-        return 0;
+        if (semitones > -33) // A4 - C2 = -33
+            semitones--;
+        break;
     case 'x':
         if (sg->octave < 2)
             sg->octave++;
@@ -240,115 +240,116 @@ int TUI::update()
             sg->octave--;
         break;
     case 'a':
-        semitoneOffset = -9;
+        semitones = -9 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "C      ");
         drawKeyboardWindow(KEY_TEXTURES[0]);
         break;
     case 'w':
-        semitoneOffset = -8;
+        semitones = -8 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "C#/Db  ");
         drawKeyboardWindow(KEY_TEXTURES[1]);
         break;
     case 's':
-        semitoneOffset = -7;
+        semitones = -7 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "D      ");
         drawKeyboardWindow(KEY_TEXTURES[2]);
         break;
     case 'e':
-        semitoneOffset = -6;
+        semitones = -6 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "D#/Eb  ");
         drawKeyboardWindow(KEY_TEXTURES[3]);
         break;
     case 'd':
-        semitoneOffset = -5;
+        semitones = -5 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "E      ");
         drawKeyboardWindow(KEY_TEXTURES[4]);
         break;
     case 'f':
-        semitoneOffset = -4;
+        semitones = -4 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "F      ");
         drawKeyboardWindow(KEY_TEXTURES[5]);
         break;
     case 't':
-        semitoneOffset = -3;
+        semitones = -3 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "F#/Gb  ");
         drawKeyboardWindow(KEY_TEXTURES[6]);
         break;
     case 'g':
-        semitoneOffset = -2;
+        semitones = -2 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "G      ");
         drawKeyboardWindow(KEY_TEXTURES[7]);
         break;
     case 'y':
-        semitoneOffset = -1;
+        semitones = -1 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "G#/Ab  ");
         drawKeyboardWindow(KEY_TEXTURES[8]);
         break;
     case 'h':
-        semitoneOffset = 0;
+        semitones = 0 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "A      ");
         drawKeyboardWindow(KEY_TEXTURES[9]);
         break;
     case 'u':
-        semitoneOffset = 1;
+        semitones = 1 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "A#/Bb  ");
         drawKeyboardWindow(KEY_TEXTURES[10]);
         break;
     case 'j':
-        semitoneOffset = 2;
+        semitones = 2 + (12 * sg->octave);
         in_upper_octave = 0;
         strcpy(note_name, "B      ");
         drawKeyboardWindow(KEY_TEXTURES[11]);
         break;
     case 'k':
-        semitoneOffset = 3;
+        semitones = 3 + (12 * sg->octave);
         in_upper_octave = 1;
         strcpy(note_name, "C      ");
         drawKeyboardWindow(KEY_TEXTURES[12]);
         break;
     case 'o':
-        semitoneOffset = 4;
+        semitones = 4 + (12 * sg->octave);
         in_upper_octave = 1;
         strcpy(note_name, "C#/Db  ");
         drawKeyboardWindow(KEY_TEXTURES[13]);
         break;
     case 'l':
-        semitoneOffset = 5;
+        semitones = 5 + (12 * sg->octave);
         in_upper_octave = 1;
         strcpy(note_name, "D      ");
         drawKeyboardWindow(KEY_TEXTURES[14]);
         break;
     case 'p':
-        semitoneOffset = 6;
+        semitones = 6 + (12 * sg->octave);
         in_upper_octave = 1;
         strcpy(note_name, "D#/Eb  ");
         drawKeyboardWindow(KEY_TEXTURES[15]);
         break;
     case ';':
-        semitoneOffset = 7;
+        semitones = 7 + (12 * sg->octave);
         in_upper_octave = 1;
         strcpy(note_name, "E      ");
         drawKeyboardWindow(KEY_TEXTURES[16]);
         break;
     case '\'':
+        semitones = 8 + (12 * sg->octave);
         strcpy(note_name, "F      ");
         drawKeyboardWindow(KEY_TEXTURES[17]);
         break;
     }
 
     // Set semitones and note name
-    sg->semitones = semitoneOffset + (12 * sg->octave);
+    sg->semitones = semitones;
     sg->note_name = note_name;
 
     return 0;
