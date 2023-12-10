@@ -5,6 +5,26 @@
 #include "tui.hpp"
 #include "samplegenerator.hpp"
 
+static const char *KEY_TEXTURES[] = {
+    "|##| | | |  |  | | | | | |  |  | | | |  |   |\n|##|_| |_|  |  |_| |_| |_|  |  |_| |_|  |   |\n|###|   |   |   |   |   |   |   |   |   |   |\n|###|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  |#| | |  |  | | | | | |  |  | | | |  |   |\n|  |#| |_|  |  |_| |_| |_|  |  |_| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | |#| |  |  | | | | | |  |  | | | |  |   |\n|  |_|#|_|  |  |_| |_| |_|  |  |_| |_|  |   |\n|   |###|   |   |   |   |   |   |   |   |   |\n|___|###|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | |#|  |  | | | | | |  |  | | | |  |   |\n|  |_| |#|  |  |_| |_| |_|  |  |_| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |##|  | | | | | |  |  | | | |  |   |\n|  |_| |_|##|  |_| |_| |_|  |  |_| |_|  |   |\n|   |   |###|   |   |   |   |   |   |   |   |\n|___|___|###|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |##| | | | | |  |  | | | |  |   |\n|  |_| |_|  |##|_| |_| |_|  |  |_| |_|  |   |\n|   |   |   |###|   |   |   |   |   |   |   |\n|___|___|___|###|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  |#| | | | |  |  | | | |  |   |\n|  |_| |_|  |  |#| |_| |_|  |  |_| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | |#| | | |  |  | | | |  |   |\n|  |_| |_|  |  |_|#|_| |_|  |  |_| |_|  |   |\n|   |   |   |   |###|   |   |   |   |   |   |\n|___|___|___|___|###|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | | |#| | |  |  | | | |  |   |\n|  |_| |_|  |  |_| |#| |_|  |  |_| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | | | |#| |  |  | | | |  |   |\n|  |_| |_|  |  |_| |_|#|_|  |  |_| |_|  |   |\n|   |   |   |   |   |###|   |   |   |   |   |\n|___|___|___|___|___|###|___|___|___|___|___|\n",
+    "|  | | | |  |  | | | | |#|  |  | | | |  |   |\n|  |_| |_|  |  |_| |_| |#|  |  |_| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | | | | | |##|  | | | |  |   |\n|  |_| |_|  |  |_| |_| |_|##|  |_| |_|  |   |\n|   |   |   |   |   |   |###|   |   |   |   |\n|___|___|___|___|___|___|###|___|___|___|___|\n",
+    "|  | | | |  |  | | | | | |  |##| | | |  |   |\n|  |_| |_|  |  |_| |_| |_|  |##|_| |_|  |   |\n|   |   |   |   |   |   |   |###|   |   |   |\n|___|___|___|___|___|___|___|###|___|___|___|\n",
+    "|  | | | |  |  | | | | | |  |  |#| | |  |   |\n|  |_| |_|  |  |_| |_| |_|  |  |#| |_|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | | | | | |  |  | |#| |  |   |\n|  |_| |_|  |  |_| |_| |_|  |  |_|#|_|  |   |\n|   |   |   |   |   |   |   |   |###|   |   |\n|___|___|___|___|___|___|___|___|###|___|___|\n",
+    "|  | | | |  |  | | | | | |  |  | | |#|  |   |\n|  |_| |_|  |  |_| |_| |_|  |  |_| |#|  |   |\n|   |   |   |   |   |   |   |   |   |   |   |\n|___|___|___|___|___|___|___|___|___|___|___|\n",
+    "|  | | | |  |  | | | | | |  |  | | | |##|   |\n|  |_| |_|  |  |_| |_| |_|  |  |_| |_|##|   |\n|   |   |   |   |   |   |   |   |   |###|   |\n|___|___|___|___|___|___|___|___|___|###|___|\n",
+    "|  | | | |  |  | | | | | |  |  | | | |  |###|\n|  |_| |_|  |  |_| |_| |_|  |  |_| |_|  |###|\n|   |   |   |   |   |   |   |   |   |   |###|\n|___|___|___|___|___|___|___|___|___|___|###|\n"};
+
 // Executes mvprintw with given y and x offsets.
 void TUI::displayString(int y, int x, char *symbol)
 {
@@ -66,33 +86,81 @@ void TUI::drawWave()
 }
 
 // Draws the keyboard window.
-void TUI::drawKeyboardWindow()
+void TUI::drawKeyboardWindow(const char *note)
 {
     // MAKE SURE:
     // redraw ENTIRE keyboard window every time there is a change.
     // To avoid unnecessary complexity, just have string constants for all 18 keyboard images
     // (Can have entire keyboard image in one string just using '\n's)
 
-    mvprintw(0, 1, "  ____ __  __ __  _  _____  _   _   ____  _   _\n  (_ (_`\\ \\/ /|  \\| ||_   _|| |_| | (_ (_`| |_| |\n .__)__) |__| |_|\\__|  |_|  |_| |_|.__)__)|_| |_|");
-    // mvprintw(0, 1, "  ____ __  __ __  _  _____  _   _   ____  _   _");
-    // mvprintw(1, 1, " (_ (_`\\ \\/ /|  \\| ||_   _|| |_| | (_ (_`| |_| |");
-    // mvprintw(2, 1, ".__)__) |__| |_|\\__|  |_|  |_| |_|.__)__)|_| |_|");
+    mvprintw(0, 1, "  ____ __  __ __  _  _____  _   _   ____  _   _");
+    mvprintw(1, 1, " (_ (_`\\ \\/ /|  \\| ||_   _|| |_| | (_ (_`| |_| |");
+    mvprintw(2, 1, ".__)__) |__| |_|\\__|  |_|  |_| |_|.__)__)|_| |_|");
 
     int j = 12;
     int k = 22;
 
-    mvaddch(j + 1, k, ACS_TTEE);
+    int tspaces[] = {0, 3, 5, 7, 9, 12, 15, 17, 19, 21, 23, 25, 28, 31, 33, 35, 37, 40};
+
+    for (int tval : tspaces)
+    {
+        mvaddch(j + 1, k + tval, ACS_TTEE);
+    }
     mvaddch(j + 1, k + 44, ACS_RTEE);
 
-    mvprintw(j + 2, k, "|  |#| | |  |  | |#| | | |  |  | | | |  |   |");
-    mvprintw(j + 3, k, "|  |#| | |  |  | |#| | | |  |  | | | |  |   |");
-    mvprintw(j + 4, k, "|   |   |   |   |###|   |   |   |   |   |   |");
-    mvprintw(j + 5, k, "|___________________________________________|");
-    mvprintw(j + 6, k, "  a   s   d   f   g   h   j   k   l   ;   '  ");
-    mvprintw(j + 7, k, "    w   e       t   y   u       o   p        ");
+    WINDOW *wave_window = newwin(6, 50, j + 2, k);
 
-    // Do this with vlines instead?
-    // mvvline(0, 4, 0, 5);
+    wprintw(wave_window, note);
+
+    const char *KEY_LABELS = " (a) (s) (d) (f) (g) (h) (j) (k) (l) (;) (')\n   (w) (e)     (t) (y) (u)     (o) (p)";
+
+    wprintw(wave_window, KEY_LABELS);
+
+    refresh();
+    wrefresh(wave_window);
+}
+
+void TUI::drawControlWindow()
+{
+    WINDOW *control_window = newwin(6, 20, WINDOW_HEIGHT + 2 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET);
+
+    // (don't need to print this every time)
+    mvwprintw(control_window, 2, 10, "(</>)");
+    mvwprintw(control_window, 3, 10, "(^/v)");
+    mvwprintw(control_window, 4, 10, "(# keys)");
+    mvwprintw(control_window, 5, 10, "(z/x)");
+
+    // Get current generator values
+    int amplitude = sg->amplitude;
+    int octave = sg->octave;
+    int wave_shape = sg->wave_shape;
+
+    // Display frequency amplitude, wave shape
+    mvwprintw(control_window, 2, 0, "%6d Hz", sg->toHz());
+    mvwprintw(control_window, 3, 0, "%6.2f %%", amplitude * 100 / (double)255);
+
+    char wave_display[64];
+    switch (wave_shape)
+    {
+    case 0:
+        strcpy(wave_display, "sine");
+        break;
+    case 1:
+        strcpy(wave_display, "saw");
+        break;
+    case 2:
+        strcpy(wave_display, "square");
+        break;
+    }
+    mvwprintw(control_window, 4, 0, wave_display);
+
+    // Display note and octave
+    mvwprintw(control_window, 0, 0, sg->note_name);
+    char octave_display = (octave + 4 + in_upper_octave) + 48;
+    mvwaddch(control_window, 0, 10, octave_display);
+
+    refresh();
+    wrefresh(control_window);
 }
 
 // Initializes the TUI.
@@ -101,9 +169,10 @@ void TUI::init()
     // Allocate space for SampleGenerator member
     sg = (SampleGenerator *)malloc(sizeof(SampleGenerator));
 
-    // Initialize amplitude, frequency, octave, wave shape in generator
-    sg->amplitude = 255;
+    // Initialize values for sample generator
     sg->semitones = 0;
+    sg->amplitude = 255;
+    sg->note_name = (char *)"A";
     sg->octave = 0;
     sg->wave_shape = 0;
 
@@ -118,174 +187,169 @@ void TUI::init()
     keypad(stdscr, TRUE); // Allow for arrow key input
 
     drawWaveWindow();
-    drawKeyboardWindow();
+    drawKeyboardWindow(KEY_TEXTURES[9]);
 }
 
 // Updates the TUI (one frame).
 int TUI::update()
 {
+    // Display current values for generator
     drawWave();
+    drawControlWindow();
 
-    // Get current amplitude, frequency, octave
-    int amplitude = sg->amplitude;
-    int semitones = sg->semitones;
-    int octave = sg->octave;
+    // Get keyboard input to set new values for generator
+    int semitoneOffset = 0;
+    char note_name[64];
+    strcpy(note_name, sg->note_name);
 
-    // Display amplitude and frequency
-    mvprintw(WINDOW_HEIGHT + 4 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6.2f %%", amplitude * 100 / (double)255);
-    mvprintw(WINDOW_HEIGHT + 5 + WINDOW_Y_OFFSET, WINDOW_X_OFFSET, "%6d Hz", sg->toHz());
-
-    // Set local values and display according to keyboard input
-    char display[20];
     switch (getch())
     {
     case 'q':
         return 1;
     case '1':
-        strcpy(display, "sine   ");
         sg->wave_shape = 0;
         break;
     case '2':
-        strcpy(display, "saw    ");
         sg->wave_shape = 1;
         break;
     case '3':
-        strcpy(display, "square ");
         sg->wave_shape = 2;
         break;
     case KEY_UP:
-        strcpy(display, "amp++  ");
-        if (amplitude <= 255 - AMP_STEP)
-            amplitude += AMP_STEP;
+        if (sg->amplitude <= 255 - AMP_STEP)
+            sg->amplitude += AMP_STEP;
         break;
     case KEY_DOWN:
-        strcpy(display, "amp--  ");
-        if (amplitude >= AMP_STEP)
-            amplitude -= AMP_STEP;
+        if (sg->amplitude >= AMP_STEP)
+            sg->amplitude -= AMP_STEP;
         break;
     case KEY_RIGHT:
-        strcpy(display, "freq++ ");
-        if (semitones < 32) // F7 - A4 = 32
-            semitones++;
-        break;
+        if (sg->semitones < 32) // F7 - A4 = 32
+            sg->semitones++;
+        return 0;
     case KEY_LEFT:
-        strcpy(display, "freq-- ");
-        if (semitones > -33) // A4 - C2 = -33
-            semitones--;
-        break;
+        if (sg->semitones > -33) // A4 - C2 = -33
+            sg->semitones--;
+        return 0;
     case 'x':
-        strcpy(display, "oct++  ");
-        if (octave < 2)
-            octave++;
+        if (sg->octave < 2)
+            sg->octave++;
         break;
     case 'z':
-        strcpy(display, "oct--  ");
-        if (octave > -2)
-            octave--;
+        if (sg->octave > -2)
+            sg->octave--;
         break;
     case 'a':
-        strcpy(display, "C      ");
-        semitones = -9 + 12 * octave;
+        semitoneOffset = -9;
         in_upper_octave = 0;
+        strcpy(note_name, "C      ");
+        drawKeyboardWindow(KEY_TEXTURES[0]);
         break;
     case 'w':
-        strcpy(display, "C# / Db");
-        semitones = -8 + 12 * octave;
+        semitoneOffset = -8;
         in_upper_octave = 0;
+        strcpy(note_name, "C#/Db  ");
+        drawKeyboardWindow(KEY_TEXTURES[1]);
         break;
     case 's':
-        strcpy(display, "D      ");
-        semitones = -7 + 12 * octave;
+        semitoneOffset = -7;
         in_upper_octave = 0;
+        strcpy(note_name, "D      ");
+        drawKeyboardWindow(KEY_TEXTURES[2]);
         break;
     case 'e':
-        strcpy(display, "D# / Eb");
-        semitones = -6 + 12 * octave;
+        semitoneOffset = -6;
         in_upper_octave = 0;
+        strcpy(note_name, "D#/Eb  ");
+        drawKeyboardWindow(KEY_TEXTURES[3]);
         break;
     case 'd':
-        strcpy(display, "E      ");
-        semitones = -5 + 12 * octave;
+        semitoneOffset = -5;
         in_upper_octave = 0;
+        strcpy(note_name, "E      ");
+        drawKeyboardWindow(KEY_TEXTURES[4]);
         break;
     case 'f':
-        strcpy(display, "F      ");
-        semitones = -4 + 12 * octave;
+        semitoneOffset = -4;
         in_upper_octave = 0;
+        strcpy(note_name, "F      ");
+        drawKeyboardWindow(KEY_TEXTURES[5]);
         break;
     case 't':
-        strcpy(display, "F# / Gb");
-        semitones = -3 + 12 * octave;
+        semitoneOffset = -3;
         in_upper_octave = 0;
+        strcpy(note_name, "F#/Gb  ");
+        drawKeyboardWindow(KEY_TEXTURES[6]);
         break;
     case 'g':
-        strcpy(display, "G      ");
-        semitones = -2 + 12 * octave;
+        semitoneOffset = -2;
         in_upper_octave = 0;
+        strcpy(note_name, "G      ");
+        drawKeyboardWindow(KEY_TEXTURES[7]);
         break;
     case 'y':
-        strcpy(display, "G# / Ab");
-        semitones = -1 + 12 * octave;
+        semitoneOffset = -1;
         in_upper_octave = 0;
+        strcpy(note_name, "G#/Ab  ");
+        drawKeyboardWindow(KEY_TEXTURES[8]);
         break;
     case 'h':
-        strcpy(display, "A      ");
-        semitones = 0 + 12 * octave;
+        semitoneOffset = 0;
         in_upper_octave = 0;
+        strcpy(note_name, "A      ");
+        drawKeyboardWindow(KEY_TEXTURES[9]);
         break;
     case 'u':
-        strcpy(display, "A# / Bb");
-        semitones = 1 + 12 * octave;
+        semitoneOffset = 1;
         in_upper_octave = 0;
+        strcpy(note_name, "A#/Bb  ");
+        drawKeyboardWindow(KEY_TEXTURES[10]);
         break;
     case 'j':
-        strcpy(display, "B      ");
-        semitones = 2 + 12 * octave;
+        semitoneOffset = 2;
         in_upper_octave = 0;
+        strcpy(note_name, "B      ");
+        drawKeyboardWindow(KEY_TEXTURES[11]);
         break;
     case 'k':
-        strcpy(display, "C      ");
-        semitones = 3 + 12 * octave;
+        semitoneOffset = 3;
         in_upper_octave = 1;
+        strcpy(note_name, "C      ");
+        drawKeyboardWindow(KEY_TEXTURES[12]);
         break;
     case 'o':
-        strcpy(display, "C# / Db");
-        semitones = 4 + 12 * octave;
+        semitoneOffset = 4;
         in_upper_octave = 1;
+        strcpy(note_name, "C#/Db  ");
+        drawKeyboardWindow(KEY_TEXTURES[13]);
         break;
     case 'l':
-        strcpy(display, "D      ");
-        semitones = 5 + 12 * octave;
+        semitoneOffset = 5;
         in_upper_octave = 1;
+        strcpy(note_name, "D      ");
+        drawKeyboardWindow(KEY_TEXTURES[14]);
         break;
     case 'p':
-        strcpy(display, "D# / Eb");
-        semitones = 6 + 12 * octave;
+        semitoneOffset = 6;
         in_upper_octave = 1;
+        strcpy(note_name, "D#/Eb  ");
+        drawKeyboardWindow(KEY_TEXTURES[15]);
         break;
     case ';':
-        strcpy(display, "E      ");
-        semitones = 7 + 12 * octave;
+        semitoneOffset = 7;
         in_upper_octave = 1;
+        strcpy(note_name, "E      ");
+        drawKeyboardWindow(KEY_TEXTURES[16]);
         break;
     case '\'':
-        strcpy(display, "F      ");
-        semitones = 8 + 12 * octave;
-        in_upper_octave = 1;
+        strcpy(note_name, "F      ");
+        drawKeyboardWindow(KEY_TEXTURES[17]);
         break;
-    default:
-        strcpy(display, "       ");
     }
 
-    // Display octave
-    char octave_display = (octave + 4 + in_upper_octave) + 48;
-    strncat(display, &octave_display, 1);
-    displayString(WINDOW_HEIGHT + 2, 0, (char *)display);
-
-    // Set amplitude, frequency, octave
-    sg->amplitude = amplitude;
-    sg->semitones = semitones;
-    sg->octave = octave;
+    // Set semitones and note name
+    sg->semitones = semitoneOffset + (12 * sg->octave);
+    sg->note_name = note_name;
 
     return 0;
 }

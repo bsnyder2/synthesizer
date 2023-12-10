@@ -1,6 +1,8 @@
 #ifndef TUI_H
 #define TUI_H
 
+#include <string>
+
 #include "samplegenerator.hpp"
 
 class TUI
@@ -22,7 +24,8 @@ private:
     void drawWaveWindow();
     void clearWaveWindow();
     void drawWave();
-    void drawKeyboardWindow();
+    void drawKeyboardWindow(const char *);
+    void drawControlWindow();
 
 public:
     SampleGenerator *sg;

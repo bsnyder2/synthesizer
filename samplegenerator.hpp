@@ -4,8 +4,10 @@
 class SampleGenerator
 {
 public:
-    int amplitude;
     int semitones;
+    int amplitude;
+
+    char *note_name;
     int octave;
 
     int wave_shape;
