@@ -215,6 +215,9 @@ int TUI::update()
     case '3':
         sg->wave_shape = 2;
         break;
+    case '4':
+        sg->wave_shape = 3;
+        break;
     case KEY_UP:
         if (sg->amplitude <= 255 - AMP_STEP)
             sg->amplitude += AMP_STEP;

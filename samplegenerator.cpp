@@ -15,6 +15,7 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
     {
         double adjustedAmplitude = amplitude / (double)255;
         double adjustedFrequency = toHz() * (frame_i / (double)44100 + stream_time);
+        // Formulas for wave shape expressions taken from Wikipedia.
         switch (wave_shape)
         {
         case 0: // Sine wave
@@ -29,6 +30,8 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
             *buffer++ = adjustedAmplitude *
                         std::copysign(1.0, sin(2 * M_PI * adjustedFrequency));
             break;
+        case 3: // Triangle wave
+                // *buffer++ = (4 * adjustedAmplitude * adjustedFrequency) * abs(fmod((1 - (1 / (4 * adjustedFrequency))), 1 / adjustedFrequency) - (1 / (2 * adjustedFrequency))) - adjustedAmplitude;
         }
     }
 }
