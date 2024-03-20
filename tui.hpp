@@ -14,7 +14,7 @@ private:
     static const int WINDOW_WIDTH = 64;
 
     static const int SCALE_FACTOR = WINDOW_HEIGHT / 2;
-    static const int AMP_STEP = 15;
+    static const int AMP_STEP = 5;
 
     int in_upper_octave;
 

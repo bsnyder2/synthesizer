@@ -16,6 +16,10 @@ Ben Snyder, Emerson Rosen-Jones, Joshua Bowen, Ryan Beatty
     - Current waveshape selected
 - Info pane on key press!
 
+### Big goals
+- Record song I made with multiple windows- Happy Plants/improv- i synthesizor
+- MIDI
+
 ### Synthesis
 - Triangle wave preset, this should be pretty easy
 

@@ -32,6 +32,7 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
             break;
         case 3: // Triangle wave
                 // *buffer++ = (4 * adjustedAmplitude * adjustedFrequency) * abs(fmod((1 - (1 / (4 * adjustedFrequency))), 1 / adjustedFrequency) - (1 / (2 * adjustedFrequency))) - adjustedAmplitude;
+            break;
         }
     }
 }
