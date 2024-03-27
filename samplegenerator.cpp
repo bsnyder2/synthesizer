@@ -3,9 +3,9 @@
 #include "samplegenerator.hpp"
 
 // Returns the current generator frequency in Hz.
-int SampleGenerator::toHz()
+double SampleGenerator::toHz()
 {
-    return round(440 * pow(2, semitones / (double)12));
+    return 440 * pow(2, semitones / (double)12);
 }
 
 // Writes n samples of a waveform to a buffer.

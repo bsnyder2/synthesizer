@@ -12,7 +12,7 @@ public:
 
     int wave_shape;
 
-    int toHz();
+    double toHz();
     void fillSamples(double *, int, double, int);
 };
 

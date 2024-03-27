@@ -136,7 +136,7 @@ void TUI::drawControlWindow()
     int wave_shape = sg->wave_shape;
 
     // Display frequency amplitude, wave shape
-    mvwprintw(control_window, 2, 0, "%6d Hz", sg->toHz());
+    mvwprintw(control_window, 2, 0, "%6d Hz", (int)sg->toHz());
     mvwprintw(control_window, 3, 0, "%6.2f %%", amplitude * 100 / (double)255);
 
     char wave_display[64];
