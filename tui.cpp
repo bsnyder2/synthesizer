@@ -76,7 +76,7 @@ void TUI::drawWave()
 
     // Get enough samples to fill the window
     int n_samples = WINDOW_WIDTH * WINDOW_HSCALE;
-    double samples[n_samples];
+    double samples[MAX_DISPLAY_SAMPLES];
     sg->fillSamples(samples, n_samples, 0, sg->wave_shape);
 
     // draw every WINDOW_HSCALEth sample

@@ -15,6 +15,7 @@ private:
 
     static const int WINDOW_VSCALE = WINDOW_HEIGHT / 2;
     static const int WINDOW_HSCALE = 4;
+    static const int MAX_DISPLAY_SAMPLES = 65536;
     static const int AMP_STEP = 5;
 
     int in_upper_octave;
