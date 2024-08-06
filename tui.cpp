@@ -74,14 +74,16 @@ void TUI::drawWave()
 {
     clearWaveWindow();
 
-    // Get samples
-    double samples[WINDOW_WIDTH];
-    sg->fillSamples(samples, WINDOW_WIDTH, 0, sg->wave_shape);
+    // Get enough samples to fill the window
+    int n_samples = WINDOW_WIDTH * WINDOW_HSCALE;
+    double samples[n_samples];
+    sg->fillSamples(samples, n_samples, 0, sg->wave_shape);
 
-    for (int s = 0; s < WINDOW_WIDTH; s++)
+    // draw every WINDOW_HSCALEth sample
+    for (int s = 0; s < n_samples; s++)
     {
-        int scaled_sample = round(samples[s] * SCALE_FACTOR);
-        displayString((WINDOW_HEIGHT / 2) - scaled_sample, s, (char *)"*");
+        int scaled_sample = round(samples[s] * WINDOW_VSCALE);
+        displayString((WINDOW_HEIGHT / 2) - scaled_sample, s / WINDOW_HSCALE, (char *)"*");
     }
 }
 
@@ -231,7 +233,7 @@ int TUI::update()
             semitones++;
         break;
     case KEY_LEFT:
-        if (semitones > -33) // A4 - C2 = -33
+        if (semitones > -45) // A4 - C1 = -45
             semitones--;
         break;
     case 'x':
@@ -239,7 +241,7 @@ int TUI::update()
             sg->octave++;
         break;
     case 'z':
-        if (sg->octave > -2)
+        if (sg->octave > -3)
             sg->octave--;
         break;
     case 'a':
