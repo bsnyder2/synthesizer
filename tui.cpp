@@ -153,6 +153,9 @@ void TUI::drawControlWindow()
     case 2:
         strcpy(wave_display, "square");
         break;
+    case 3:
+        strcpy(wave_display, "triangle");
+        break;
     }
     mvwprintw(control_window, 4, 0, wave_display);
 

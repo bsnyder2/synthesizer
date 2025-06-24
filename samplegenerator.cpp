@@ -31,7 +31,8 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
                         std::copysign(1.0, sin(2 * M_PI * adjustedFrequency));
             break;
         case 3: // Triangle wave
-                // *buffer++ = (4 * adjustedAmplitude * adjustedFrequency) * abs(fmod((1 - (1 / (4 * adjustedFrequency))), 1 / adjustedFrequency) - (1 / (2 * adjustedFrequency))) - adjustedAmplitude;
+            *buffer++ = adjustedAmplitude *
+                        (2 / (double)M_PI) * asin(sin(2 * M_PI * adjustedFrequency));
             break;
         }
     }
