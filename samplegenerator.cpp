@@ -22,17 +22,17 @@ void SampleGenerator::fillSamples(double *buffer, int n_frames, double stream_ti
             *buffer++ = adjustedAmplitude *
                         sin(2 * M_PI * adjustedFrequency);
             break;
-        case 1: // Sawtooth wave
+        case 1: // Triangle wave
+            *buffer++ = adjustedAmplitude *
+                        (2 / (double)M_PI) * asin(sin(2 * M_PI * adjustedFrequency));
+            break;
+        case 2: // Sawtooth wave
             *buffer++ = adjustedAmplitude *
                         2 * (adjustedFrequency - floor(0.5 + adjustedFrequency));
             break;
-        case 2: // Square wave
+        case 3: // Square wave
             *buffer++ = adjustedAmplitude *
                         std::copysign(1.0, sin(2 * M_PI * adjustedFrequency));
-            break;
-        case 3: // Triangle wave
-            *buffer++ = adjustedAmplitude *
-                        (2 / (double)M_PI) * asin(sin(2 * M_PI * adjustedFrequency));
             break;
         }
     }

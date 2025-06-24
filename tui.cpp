@@ -142,19 +142,20 @@ void TUI::drawControlWindow()
     mvwprintw(control_window, 3, 0, "%6.2f %%", amplitude * 100 / (double)255);
 
     char wave_display[64];
+    // these are sorted by perceived loudness
     switch (wave_shape)
     {
     case 0:
         strcpy(wave_display, "sine");
         break;
     case 1:
-        strcpy(wave_display, "saw");
+        strcpy(wave_display, "triangle");
         break;
     case 2:
-        strcpy(wave_display, "square");
+        strcpy(wave_display, "saw");
         break;
     case 3:
-        strcpy(wave_display, "triangle");
+        strcpy(wave_display, "square");
         break;
     }
     mvwprintw(control_window, 4, 0, wave_display);
