@@ -352,6 +352,8 @@ int TUI::update()
         break;
     case '\'':
         semitones = 8 + (12 * sg->octave);
+        in_upper_octave = 1;
+
         strcpy(note_name, "F      ");
         drawKeyboardWindow(KEY_TEXTURES[17]);
         break;
