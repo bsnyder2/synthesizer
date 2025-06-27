@@ -18,7 +18,7 @@ private:
     static const int MAX_DISPLAY_SAMPLES = 65536;
     static const int AMP_STEP = 5;
 
-    int in_upper_octave;
+    bool in_upper_octave;
 
     void displayString(int, int, char *);
     void drawRect(int, int, int, int);
