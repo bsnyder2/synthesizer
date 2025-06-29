@@ -1,32 +1,19 @@
-# synthsh
-Ben Snyder, Emerson Rosen-Jones, Joshua Bowen, Ryan Beatty
+# synthsh: the subtractive synthesizer for your terminal window
 
-## TODO
-- Simple on-screen keyboard (done)
-    - Octave should update whenever octave key is pressed (done)
-    - C through F (done)
-- Other displays:
-    - Current note (X#) (done)
-        - Octave should only update when next note is played (done)
-    - Amplitude (%, meter on right of wave window)
-    - Frequency (Hz)
-    - Current waveshape selected
-- Info pane on key press
+## Features
+- Control amplitude and frequency
+- Choose from 4 wave shapes
+- Waveform visualizer
+- A piano keyboard
 
-### Big goals
-- MIDI
 
-### Synthesis
-- Triangle wave preset, this should be pretty easy
-
-### Larger goals
-- Press same key for key up/end note (terminals don't have key up events), this should be pretty easy
-- Play/pause button, this should be pretty easy
-- Arpeggiator + hold, this should be pretty easy
+### Next goal
+- MIDI input for piano keyboard
+- Arpeggiator + hold
     - shift to start hold. then we have an array of semitones values. e.g. [0, 4, 7] for major triad on C4
     - then can also set arp speed.
-    - tempo setting?
-- Draw one wave period with keyboard, set as waveshape, this is a cool unique features
-- Polyphony - additive synthesis
-- Waveform antialiasing
-- Normalize amplitudes for waveshapes -> same perceived volume
+    - tempo setting
+    - Draw one wave period with keyboard, set as waveshape
+    - Polyphony - additive synthesis
+    - Waveform antialiasing
+    - Normalize amplitudes for waveshapes -> same perceived volume

@@ -173,8 +173,9 @@ void TUI::drawControlWindow()
 // Initializes the TUI.
 void TUI::init()
 {
-    // Allocate space for SampleGenerator member
+    // Allocate space for SampleGenerator, Arp members
     sg = (SampleGenerator *)malloc(sizeof(SampleGenerator));
+    arp = (Arpeggiator *)malloc(sizeof(Arpeggiator));
 
     // Initialize values for sample generator
     sg->semitones = 0;
@@ -362,6 +363,9 @@ int TUI::update()
     // Set semitones and note name
     sg->semitones = semitones;
     sg->note_name = note_name;
+
+    // Arp input
+    arp->start();
 
     return 0;
 }

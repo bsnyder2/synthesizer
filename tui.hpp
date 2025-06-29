@@ -4,6 +4,7 @@
 #include <string>
 
 #include "samplegenerator.hpp"
+#include "arpeggiator.hpp"
 
 class TUI
 {
@@ -31,6 +32,7 @@ private:
 
 public:
     SampleGenerator *sg;
+    Arpeggiator *arp;
 
     void init();
     int update();
